@@ -21,12 +21,12 @@ require 'etc'
 require 'digest/sha1'
 
 # PHP Recipe includes we already know PHPMyAdmin needs
-if node['phpmyadmin']['stand_alone'] then
+if node['phpmyadmin']['stand_alone']
 	include_recipe 'php'
-	include_recipe 'php::module_mbstring'
-	include_recipe 'php::module_mcrypt'
-	include_recipe 'php::module_gd'
-	include_recipe 'php::module_mysql'
+
+	%w{php5-gd php5-mcrypt php5-mysql}.each do |pkg|
+		package pkg
+	end
 
 	directory node['phpmyadmin']['upload_dir'] do
 		owner 'root'
