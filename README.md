@@ -22,7 +22,7 @@ Requirements
 
 This cookbook requires the following cookbooks to be present and installed:
 
-* [chef-php](https://github.com/priestjim/chef-php)
+* [php](https://github.com/chef-cookbooks/php)
 
 It also suggests the following:
 
@@ -41,7 +41,7 @@ This cookbook supports the following Linux distributions:
 * CentOS
 * RedHat
 
-It also supports **Chef 10.14** and higher
+It also supports **Chef 11** and higher
 
 Attributes
 ==========
