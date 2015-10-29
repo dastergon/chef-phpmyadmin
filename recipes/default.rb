@@ -119,23 +119,14 @@ template "#{home}/config.inc.php" do
 	mode 00644
 end
 
-if (node['phpmyadmin'].attribute?('fpm') && node['phpmyadmin']['fpm'])
- 	php_fpm 'phpmyadmin' do
-	  action :add
-	  user user
-	  group group
-	  socket true
-	  socket_path node['phpmyadmin']['socket']
-	  socket_user user
-	  socket_group group
-	  socket_perms '0666'
-	  start_servers 2
-	  min_spare_servers 2
-	  max_spare_servers 8
-	  max_children 8
-	  terminate_timeout (node['php']['ini_settings']['max_execution_time'].to_i + 20)
-	  value_overrides({
-	    :error_log => "#{node['php']['fpm_log_dir']}/phpmyadmin.log"
-	  })
-	end
+php_fpm_pool 'phpmyadmin' do
+  action :install
+  user user
+  group group
+  listen node['phpmyadmin']['socket']
+  start_servers 2
+  min_spare_servers 2
+  max_spare_servers 8
+  max_children 8
+  only_if { node['phpmyadmin'].attribute?('fpm') && node['phpmyadmin']['fpm'] }
 end
