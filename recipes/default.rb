@@ -74,8 +74,6 @@ end
 
 # Download the selected PHPMyAdmin archive
 remote_file "#{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin']['version']}-all-languages.tar.gz" do
-  owner user
-  group group
   mode 00644
 	retries 5
 	retry_delay 2
@@ -85,8 +83,6 @@ remote_file "#{Chef::Config['file_cache_path']}/phpMyAdmin-#{node['phpmyadmin'][
 end
 
 bash 'extract-php-myadmin' do
-	user user
-	group group
 	cwd home
 	code <<-EOH
 		rm -fr *
