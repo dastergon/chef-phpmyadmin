@@ -128,5 +128,6 @@ php_fpm_pool 'phpmyadmin' do
   min_spare_servers 2
   max_spare_servers 8
   max_children 8
+  ignore_failure true
   only_if { node['phpmyadmin'].attribute?('fpm') && node['phpmyadmin']['fpm'] }
 end
