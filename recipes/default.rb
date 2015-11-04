@@ -112,7 +112,7 @@ template "#{home}/config.inc.php" do
 	owner user
 	group group
 	cookbook node['phpmyadmin']['config_template_cookbook']
-	mode 00644
+	mode 00600
 end
 
 php_fpm_pool 'phpmyadmin' do
